@@ -1,0 +1,8 @@
+pyttsx3==2.91
+PyQRCode==1.2.1
+pypng==0.20220715.0
+pillow==10.4.0
+numpy==2.0.1
+opencv-python==4.10.0.84
+audioplayer==0.6
+imutils==0.5.4

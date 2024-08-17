@@ -69,4 +69,6 @@ cover/
 __pypackages__/
 .vscode
 .venv
+output/audios/*
+output/pack images/*
 # End of https://www.toptal.com/developers/gitignore/api/pythonvanilla
