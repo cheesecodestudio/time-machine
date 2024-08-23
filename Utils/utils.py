@@ -22,3 +22,32 @@ def RelativePath(path, start=""):
 def GetDownloadFolder():
     home = Path.home()
     return os.path.join(str(home), "Downloads")
+
+def SaveFiles(imagesPaths, destinationFolder):
+    if len(imagesPaths) <= 0:
+        return False
+    # Asegurarse de que la carpeta de destino existe
+    if not os.path.exists(destinationFolder):
+        os.makedirs(destinationFolder)
+
+    for imagePath in imagesPaths:
+        if os.path.isfile(imagePath):
+            try:
+                # Abrir la imagen usando Pillow
+                img = Image.open(imagePath)
+                
+                # Obtener el nombre de archivo de la imagen
+                imageName = os.path.basename(imagePath)
+                
+                # Definir la ruta completa del archivo en la carpeta de destino
+                destinationPath = os.path.join(destinationFolder, imageName)
+                
+                # Guardar la imagen en la carpeta de destino
+                img.save(destinationPath)
+            except Exception as e:
+                print(f'Error al copiar {imagePath}: {e}')
+                return False
+        else:
+            print(f'{imagePath} no es un archivo válido.')
+            return False
+    return True
