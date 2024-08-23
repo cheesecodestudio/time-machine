@@ -8,3 +8,4 @@
 [ ] Mejorar la interfaz grafica
 [ ] Hacer que intercambien los botones de pause y play
 [ ] Hacer que intercambien los botones de start y end
+[ ] Hacer pruebas
