@@ -2,6 +2,7 @@ from PIL import Image, ImageTk
 import uuid
 import os
 from pathlib import Path
+import shutil
 
 def ResizeImage(width, height, imagePath):
     # Open an image file
@@ -23,7 +24,7 @@ def GetDownloadFolder():
     home = Path.home()
     return os.path.join(str(home), "Downloads")
 
-def SaveFiles(imagesPaths, destinationFolder):
+def SaveImageFiles(imagesPaths, destinationFolder):
     if len(imagesPaths) <= 0:
         return False
     # Asegurarse de que la carpeta de destino existe
@@ -51,3 +52,28 @@ def SaveFiles(imagesPaths, destinationFolder):
             print(f'{imagePath} no es un archivo válido.')
             return False
     return True
+
+def SaveAudioFile(audioPath, destinationFolder):
+    # Asegurarse de que la carpeta de destino existe
+    if not os.path.exists(destinationFolder):
+        os.makedirs(destinationFolder)
+    
+    if os.path.isfile(audioPath):
+        try:
+            # Obtener el nombre de archivo de la imagen
+            audioName = os.path.basename(audioPath)
+
+            if not audioName.find(".wav"):
+                raise Exception("El formato del archivo no es válido.")
+            
+            # Definir la ruta completa del archivo en la carpeta de destino
+            destinationPath = os.path.join(destinationFolder, audioName)
+            
+            shutil.copy(audioPath, destinationPath)
+            return True
+        except Exception as e:
+            print(e)
+            return False
+    else:
+        print(f'{audioPath} no es un archivo válido.')
+        return False

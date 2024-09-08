@@ -1,7 +1,7 @@
 import pyttsx3
 
 def TextToSpeach(text, filePath):
-    if len(text) == 0:
+    if len(text.rstrip()) == 0:
         return False
     try:
         # Initialize the text-to-speech engine

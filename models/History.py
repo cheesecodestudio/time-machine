@@ -1,5 +1,6 @@
 from audioplayer import AudioPlayer
 import os
+import keyboard
 
 class History:
     def __init__(self):
@@ -7,7 +8,7 @@ class History:
         self.player = None
         self.state = ""
         self.image_paths = []
-        self.delay = 5000
+        self.delay = 10000
         self.index_images = 0
 
     def create(self, file_name):
@@ -26,24 +27,37 @@ class History:
     def is_speaking(self):
         return self.state != ""
 
-    def audio_controller(self):
+    def repeat(self):
         if self.is_speaking():
-            # Stop the audio
-            if keyboard.is_pressed('6'):
-                self.player.stop()
-                self.state = ""
-            
-            # Repeat the audio
-            if keyboard.is_pressed('4'):
-                self.player.play()
-                self.state = "playing"
-            
-            # Pause the audio
-            if keyboard.is_pressed('5'):
-                self.player.pause()
-                self.state = "pause"
+            self.player.play()
+            self.state = "playing"
+    
+    def resume(self):
+        if self.is_speaking():
+            self.player.resume()
+            self.state = "playing"
+    
+    def pause(self):
+        if self.is_speaking():
+            self.player.pause()
+            self.state = "pause"
+    
+    def stop(self):
+        if self.is_speaking():
+            self.player.stop()
+            self.state = ""
+            self.file_name = ""
 
-            # Resume the audio
-            if keyboard.is_pressed('2'):
-                self.player.resume()
-                self.state = "playing"
+    def audio_controller(self):
+            # Stop the audio
+        if keyboard.is_pressed('6'):
+            self.stop()
+        # Repeat the audio
+        if keyboard.is_pressed('4'):
+            self.repeat()
+        # Pause the audio
+        if keyboard.is_pressed('5'):
+            self.pause()
+        # Resume the audio
+        if keyboard.is_pressed('2'):
+            self.resume()
