@@ -17,6 +17,7 @@ BUTTON_SIZE = 100
 isStart = False
 window.attributes('-fullscreen', True)
 window.title("Máquina del Tiempo")
+image_frame_on = False
 
 # Background ====================================================#
 imgBackground = ResizeImage(WIDTH, HEIGHT, ".\\assets\\imgs\\Background.png")
@@ -79,8 +80,11 @@ def camara_view():
                     frame_view.configure(image=photo)
                     frame_view.image = photo
 
-                    # Iniciar el ciclo de cambio de imágenes
-                    update_image()
+                    if(not image_frame_on):
+                        image_frame_on = True
+
+                        # Iniciar el ciclo de cambio de imágenes
+                        update_image()
 
             # Rendimensionamos el video
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
